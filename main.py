@@ -9,10 +9,10 @@ def plot(Y, w):
     pe_list = [0] * w
     #print(pe_list)
 
-    for i in range(len(Y)-w):
-        S = Y[i:i+w]
-        #pe = pec.pec(S, 5, 1)
-        pe = pec.permutation_entropy(S, 5, 1)
+    for i in range(len(Y) - w):
+        S = Y[i:i + w]
+        pe = pec.pec(S, 5, 1)
+        #pe = pec2.permutation_entropy(S, 5, 1)
         pe_list.append(pe)
 
     plt.subplot(2, 1, 2)
@@ -23,12 +23,18 @@ def plot(Y, w):
 if __name__ == "__main__":
     time = []
     voltage = []
-    with open("vfdb-418.txt") as f:
+    filename = input("Input file name:")
+    try:
+        f = open("data/" + filename)
         for line in f.readlines():
             line.rstrip('\n')
             x, y = line.split()
             #time.append(eval(x))
             voltage.append(float(y))
+    except Exception as e:
+        print(e)
+    else:
+        f.close()
 
-    f.close()
-    plot(voltage, 135)
+    if voltage:
+        plot(voltage, 135)
