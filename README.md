@@ -19,3 +19,21 @@
 <img src="https://latex.codecogs.com/gif.latex?0&space;\le&space;\frac{H_{pe}}{\log_2(m!)}&space;\le&space;1"/>  
 ![](https://render.githubusercontent.com/render/math?math=H_{pe})的大小表示时间序列![](https://render.githubusercontent.com/render/math?math=X_i)的随机程度。![](https://render.githubusercontent.com/render/math?math=H_{pe})的值越小，说明时间序列越规律；反之，则时间序列越接近随机。![](https://render.githubusercontent.com/render/math?math=H_{pe})的变化反映并放大了时间序列的微小细节变化。
 ## 使用排列熵进行信号分析
+由于心电信号的时间序列一般十分庞大，比如10秒的时间得到了2500个甚至3600个采样数据，在MIT-BIH的数据库里，有的记录时长甚至达到了24小时。因此，分析这些序列需要截短分段分析，将长度为 ![](https://render.githubusercontent.com/render/math?math=T) 的心电信号长时间序列分为若干长度为 ![](https://render.githubusercontent.com/render/math?math=%5Comega) 的子序列。这些子序列的截取相互之间可以重叠也可以不重叠。若截取片段的步长为1（也就是向后移动一位得到下一个子序列），这样可以得到的子序列个数为 ![](https://render.githubusercontent.com/render/math?math=T-%5Comega%2B1) ，然后再分别求每一段子序列的排列熵，最后将排列熵的图像画出。
+### 不同类型信号的对比
+下面是正常的窦性心律：
+![](figures/正常2.png)
+下面是心室颤动：
+![](figures/心室颤动.png)
+可以看到，心室颤动的排列熵曲线震荡幅度较大，排列熵值总体还有向下走的趋势。心室颤动的平均熵值比正常窦性心律要小，说明正常的心电信号的复杂程度比较高。  
+下面这张图是突发的信号突变，在下面的图中可以看到突变的位置熵值有一定程度地变大。
+
+### 不同![](https://render.githubusercontent.com/render/math?math=%5Comega)的对比
+此处对![](https://render.githubusercontent.com/render/math?math=%5Comega)的取值进行研究，令![](https://render.githubusercontent.com/render/math?math=%5Comega=50,200,500)，绘制出对应的排列熵曲线，进行比较。  
+下面是ω=50：
+![](figures/心室颤动-50.png)
+下面是ω=200：
+![](figures/心室颤动.png)
+下面是ω=500：
+![](figures/心室颤动-500.png)
+从图中可以看到，随着![](https://render.githubusercontent.com/render/math?math=%5Comega)的增大，排列熵曲线的震荡幅度逐渐收窄。
